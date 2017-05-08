@@ -29,7 +29,7 @@
                              <td><input type="hidden" name='cod' value='{$producto->cod}' />
                                  <input type="hidden" name='PVP' value='{$producto->PVP}' />
                                  <input type="submit" name="enviar" value="Añadir"/></td>
-                                 <input type="button" value="X-Enviar" onclick="xajax_actualiza(xajax.getFormValues('listado').)" />
+                                 <input type="button" value="X-Enviar" onclick="xajax_actualiza(xajax.getFormValues('listado'))" />
                                 {$producto->nombre_corto}: {$producto->PVP}
                         </form>
                 </p>

@@ -54,8 +54,8 @@ if (isset($_SESSION['productosCesta'])){
 // obtenermos la lista de productos
 $cesta=new Cesta();
 $baseDeDatos=new BD();
-$listaProductos=$baseDeDatos->obtieneProductos();
 
+$smarty->assign('listaProductos',$baseDeDatos->obtieneProductos());
 
 
 
@@ -101,16 +101,16 @@ if (isset($_POST['borrar'])){
                 $totalUnidades+= intval($valor);
             }
             $smarty->assign('totalUnidades',$totalUnidades);
-  //          $smarty->display('smarty/pagar.tpl');
+            $smarty->display('smarty/pagar.tpl');
 
         } elseif ($_POST['cestaAccion']=='vaciar'){
 
             $cesta->vacia();  
-  //          $smarty->display("smarty/productos.tpl");
+            $smarty->display("smarty/productos.tpl");
         }
         
     } else {
-  //      $smarty->display("smarty/productos.tpl");
+        $smarty->display("smarty/productos.tpl");
     }
  
 
@@ -130,26 +130,16 @@ if (isset($_POST['borrar'])){
           
            
             <div id='productos'>
-                <form name='listado' action="fcesta.php" method="post">
-                   <?php 
-                           $i=0;      
-                           print_r($listaProductos);
-                            for ($listaProductos[$i]){ //falta el for
-                                $i++;
-                                $lineaProducto=<<<FIN
-                                            <p>
-                                                $listaProductos->cod
-                                         <input type="hidden" name="cod" value="" />
-                                          <input type="hidden" name='PVP' value='' />
-                                             <input type="submit" name="enviar" value="Añadir"/>
-                                         <input type="button" value="X-Enviar" onclick="xajax_actualiza(xajax.getFormValues('listado'))" />
-                                        </p>    
-FIN;
-                                echo $lineaProducto;
-                            }
-                    ?>
-                </form>
-                
+      
+                <p>
+                    <form name='listado' action="fcesta.php" method="post">
+                             <td><input type="hidden" name='cod' value='{$producto->cod}' />
+                                 <input type="hidden" name='PVP' value='{$producto->PVP}' />
+                                 <input type="submit" name="enviar" value="Añadir"/></td>
+                                 <input type="button" value="X-Enviar" onclick="xajax_actualiza(xajax.getFormValues('listado'))" />
+                              
+                        </form>
+                </p>
                 
             </div>
              <div id='cesta'>
