@@ -32,10 +32,10 @@ $ajax->printJavascript();
 
 // require_once('smarty')
 function actualiza($post){
-    $codigo=$post['cod'];
-   
+   /*   $codigo=$post['cod'];
+    print_r($post);
     
-     if (isset($this->unidades[$codigo])){
+     if (isset($_SESSION['unidadesCesta'][$codigo])){
             if ($_SESSION['unidadesCesta'][$codigo] > 0) {
                 $_SESSION['unidadesCesta'][$codigo] ++;
             } 
@@ -46,37 +46,13 @@ function actualiza($post){
                 
                 
         }
+        $lineaProducto=$_SESSION['productosCesta'][$codigo];
+        $lineaProducto.=" ";
+        $lineaProducto.=$_SESSION['unidadesCesta'][$codigo];
+     */   
       $salida= new xajaxResponse();
-      $salida->assign('cesta', 'innerHTML', $_SESSION['productosCesta']);
+      $salida->addAssign('lineaCesta', 'innerHTML', "lineaProducto" );
             
     return $salida;
 }
 ?>
-<html>
-    <head>
-        <title>Cesta</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="estilos/tienda.css" rel="stylesheet" type="text/css">
-         <?php $ajax->printJavascript(); ?>
-    </head>
-    <body onload='xajax_actualiza(xajax_actualiza(xajax.getFormValues('listado'))'>
-        <div id="contenedor">
-            <div id='cesta'>
-                <div id='pagcesta'>
-
-                    <h3><img src="imagenes/cesta.png" alt='Cesta' width='24' heigth='21' /> Cesta</h3>
-                    <hr />
-                    <p id='cesta'></p>
-                    
-                    <hr />
-                     <form action='productos.php' method ='post'>
-                        <input class='cestaAccion' type='submit' disabled name='cestaAccion' value='pagar'>
-                        <input class='cestaAccion' type='submit' disabled name='cestaAccion' value='vaciar'>
-                    </form>
-                    
-                </div>    
-            </div>
-        </div>
-    </body>
-</html>

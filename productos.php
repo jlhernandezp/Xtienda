@@ -123,42 +123,82 @@ if (isset($_POST['borrar'])){
         <title>práctica de tienda página de productos </title>
         <meta charset="UTF-8">
         <link href="estilos/tienda.css" rel="stylesheet" type="text/css">
-             <?php $ajax->printJavascript(); ?>
+        <?php $ajax->printJavascript(); ?>
     </head>
-    <body>
+    <body class="pagproductos">
         <div id='contenedor'>
-          
-           
+            <h1>Listado de productos</h1>
+            
+          <div id='cesta'>
+                <div id='pagcesta'>
+
+                    <h3><img src="imagenes/cesta.png" alt='Cesta' width='24' heigth='21' /> Cesta</h3>
+                    <hr />
+                    
+                   
+                        <p id='lineaCesta'>
+                            <span class='cantidad'>cantidad</span>
+                            <span class='codigo'>codigo</span>
+                            <span class='precio'>precio</span><br />
+                        </p>
+                        <form name="compra"action="productos.php" method="post">
+                            <input type="hidden" name='codigo' value='{$codigo}' />
+                            <input class="borrar" type="submit" name="borrar" value="" />
+                        </form>
+                        </p>
+                        <hr />
+                   
+                  
+                        
+                        <span class="coste">Total: &nbsp; € </span>
+                      
+                    
+                   
+                        <p>Cesta vacia</p>
+                        
+                  
+                    <hr />
+                     <form action='productos.php' method ='post'>
+                        <input class='cestaAccion' type='submit' disabled name='cestaAccion' value='pagar'>
+                        <input class='cestaAccion' type='submit' disabled name='cestaAccion' value='vaciar'>
+                    </form>
+                    
+                </div> 
+            </div> 
             <div id='productos'>
-                <form name='listado' action="fcesta.php" method="post">
+                
                    <?php 
-                           $i=0;      
-                           print_r($listaProductos);
-                            for ($listaProductos[$i]){ //falta el for
-                                $i++;
+                                 
+                          // print_r($listaProductos);
+                          
+                            for ($i=0;$i<count($listaProductos);$i++){
+                                
                                 $lineaProducto=<<<FIN
-                                            <p>
-                                                $listaProductos->cod
-                                         <input type="hidden" name="cod" value="" />
-                                          <input type="hidden" name='PVP' value='' />
-                                             <input type="submit" name="enviar" value="Añadir"/>
-                                         <input type="button" value="X-Enviar" onclick="xajax_actualiza(xajax.getFormValues('listado'))" />
-                                        </p>    
+                                    <p>  
+                                        <form id='listado' action="fcesta.php" method="post">
+                                            
+                                              
+                                            <input type="hidden" name="cod" value="" />
+                                            <input type="hidden" name='PVP' value='' />
+                                            
+                                            <input type="submit" value="X-Enviar" onclick="xajax_actualiza(xajax.getFormValues('listado'))" />
+                                            {$listaProductos[$i]->nombre_corto} : {$listaProductos[$i]->PVP}
+                                         </form>
+                                         
+                                    </p>              
 FIN;
                                 echo $lineaProducto;
                             }
                     ?>
-                </form>
                 
                 
-            </div>
-             <div id='cesta'>
                 
             </div>
+             
              <br class="divisor" />
               <div id="pie">
               <form action='logoff.php' method='post'>
-                  <input type='submit' name='desconectar' value='Desconectar usuario {$usuario}'/>
+                  <input type='submit' name='desconectar' value=<?php echo "Desconectar usuario".$_SESSION['usuario']; ?> />
               </form>        
             </div>
         </div>
