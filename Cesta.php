@@ -4,63 +4,63 @@
  
 class Cesta {
     //atributo privado de conexión
-    protected $unidades=[];
-    protected $productos=[];
+    protected static $unidades=[];
+    protected static $productos=[];
  
    
     
     // Introduce un nuevo artículo en la cesta de la compra
-   public function nuevo_articulo($codigo) {
-       $this->carga_cesta();
-       if (isset($this->unidades[$codigo])){
-            if ($this->unidades[$codigo] > 0) {
-                $this->unidades[$codigo] ++;
+   public static function nuevo_articulo($codigo) {
+       self::carga_cesta();
+       if (isset(self::$unidades[$codigo])){
+            if (self::$unidades[$codigo] > 0) {
+                self::$unidades[$codigo] ++;
             } 
        }else {
                 $producto = BD::obtieneProducto($codigo);
-                $this->productos[$codigo]=$producto['PVP'];
-                $this->unidades[$codigo]= 1;
+                self::$productos[$codigo]=$producto['PVP'];
+                self::$unidades[$codigo]= 1;
                 
                 
         }
         
-        $this->guarda_cesta();
+       self::guarda_cesta();
    }
    
-   public function get_productos() {
+   public static function get_productos() {
        
-       return $this->productos;
+       return self::$productos;
    }
    
-   public function coste() {
+   public static function coste() {
      
          $total=0.0;
        
-       foreach ($this->productos as $clave => $valor) 
-            $total+=(floatval ($valor)*floatval ($this->unidades[$clave]));
+       foreach (self::$productos as $clave => $valor) 
+            $total+=(floatval ($valor)*floatval (self::$unidades[$clave]));
           
        
        $_SESSION['total']=$total;
        return $total;
    }
    
-   public function vacia() {
+   public static function vacia() {
        unset($_SESSION['productosCesta']);
        unset($_SESSION['unidadesCesta']);
        unset($_SESSION['total']);
        
    }
    
-   public function guarda_cesta() {
-        $_SESSION['productosCesta']= $this->productos;
-        $_SESSION['unidadesCesta']= $this->unidades;
+   public static function guarda_cesta() {
+        $_SESSION['productosCesta']= self::$productos;
+        $_SESSION['unidadesCesta']= self::$unidades;
        return null;
    }
    
-   public function carga_cesta() {
+   public static function carga_cesta() {
     if (isset($_SESSION['productosCesta'])) {
-        $this->productos=$_SESSION['productosCesta'];
-        $this->unidades=$_SESSION['unidadesCesta'];        
+        self::$productos = $_SESSION['productosCesta'];
+        self::$unidades=$_SESSION['unidadesCesta'];        
     } else {
         $_SESSION['productosCesta']="";
         $_SESSION['unidadesCesta']="";

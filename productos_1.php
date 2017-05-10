@@ -106,6 +106,7 @@ if (isset($_POST['borrar'])){
         } elseif ($_POST['cestaAccion']=='vaciar'){
 
             $cesta->vacia();  
+            $smarty->assign('cestaAccion','disabled',true);
             $smarty->display("smarty/productos.tpl");
         }
         
@@ -118,39 +119,3 @@ if (isset($_POST['borrar'])){
 
 
 ?>
-<html>
-    <head>
-        <title>práctica de tienda página de productos </title>
-        <meta charset="UTF-8">
-        <link href="estilos/tienda.css" rel="stylesheet" type="text/css">
-             <?php $ajax->printJavascript(); ?>
-    </head>
-    <body>
-        <div id='contenedor'>
-          
-           
-            <div id='productos'>
-      
-                <p>
-                    <form name='listado' action="fcesta.php" method="post">
-                             <td><input type="hidden" name='cod' value='{$producto->cod}' />
-                                 <input type="hidden" name='PVP' value='{$producto->PVP}' />
-                                 <input type="submit" name="enviar" value="Añadir"/></td>
-                                 <input type="button" value="X-Enviar" onclick="xajax_actualiza(xajax.getFormValues('listado'))" />
-                              
-                        </form>
-                </p>
-                
-            </div>
-             <div id='cesta'>
-                
-            </div>
-             <br class="divisor" />
-              <div id="pie">
-              <form action='logoff.php' method='post'>
-                  <input type='submit' name='desconectar' value='Desconectar usuario {$usuario}'/>
-              </form>        
-            </div>
-        </div>
-    </body>
-</html>

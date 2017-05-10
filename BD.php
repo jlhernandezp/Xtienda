@@ -84,7 +84,7 @@ FIN;
         }
         
     }
-    public  function obtieneProducto($codigo){
+    public static function obtieneProducto($codigo){
         self::conectar();
         try{
             $sql="SELECT * FROM producto WHERE cod='$codigo'";

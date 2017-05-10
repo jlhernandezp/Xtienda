@@ -1,14 +1,12 @@
 <?php
-session_start();
-
-//Clases
-require_once ('BD.php');
-require_once('Cesta.php');
 require_once('Smarty.class.php');
-$smarty = new Smarty;
- //cargo la librería de xajax
+require_once('BD.php');
+require_once('Cesta.php');
+
+session_start();
+/***************************************************************************/
 require ('xajax_core/xajax.inc.php');
-$ajax = new xajax();
+$ajax = new xajax('fcesta.php');
  
 //Para poder tener una traza de lo que ocurre
 $ajax->configure('debug',true);
@@ -29,30 +27,41 @@ $ajax->processRequest();
 //La librería necesita generar código java script en la página que enviamos al cliente
 $ajax->printJavascript();
 
+/***************************************************************************/
+if (!isset($_SESSION['usuario'])) 
+    die("Error - debe <a href='login.php'>identificarse</a>.<br />");
+// Cargamos la librería de Smarty
+$smarty = new Smarty;
 
-// require_once('smarty')
+
+
 function actualiza($post){
-   /*   $codigo=$post['cod'];
-    print_r($post);
+   $producto=BD::obtieneProducto($post['cod']);
+
+   Cesta::nuevo_articulo($producto['cod']);
+    
+    $codigo=$producto['cod'];
     
      if (isset($_SESSION['unidadesCesta'][$codigo])){
             if ($_SESSION['unidadesCesta'][$codigo] > 0) {
                 $_SESSION['unidadesCesta'][$codigo] ++;
             } 
        }else {
-                $producto = BD::obtieneProducto($codigo);
+               // $producto = BD::obtieneProducto($codigo);
                 $_SESSION['productosCesta'][$codigo]=$producto['PVP'];
                 $_SESSION['unidadesCesta'][$codigo]= 1;
                 
                 
         }
-        $lineaProducto=$_SESSION['productosCesta'][$codigo];
-        $lineaProducto.=" ";
-        $lineaProducto.=$_SESSION['unidadesCesta'][$codigo];
-     */   
+        $linea="";
+       foreach ($_SESSION['productosCesta'] as $productoCesta){
+        $linea.="<p>".$_SESSION['unidadesCesta'][$codigo]." ".$productoCesta[0]." ".$productoCesta[1];   
+       }
+       
+    
       $salida= new xajaxResponse();
-      $salida->addAssign('lineaCesta', 'innerHTML', "lineaProducto" );
+      $salida->assign('pCesta', 'innerHTML', $linea );
             
     return $salida;
 }
-?>
+
