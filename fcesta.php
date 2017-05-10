@@ -39,9 +39,9 @@ function actualiza($post){
    $producto=BD::obtieneProducto($post['cod']);
 
    Cesta::nuevo_articulo($producto['cod']);
-    
+   Cesta::carga_cesta(); 
     $codigo=$producto['cod'];
-    
+     
      if (isset($_SESSION['unidadesCesta'][$codigo])){
             if ($_SESSION['unidadesCesta'][$codigo] > 0) {
                 $_SESSION['unidadesCesta'][$codigo] ++;
@@ -53,14 +53,15 @@ function actualiza($post){
                 
                 
         }
+        Cesta::guarda_cesta();
         $linea="";
        foreach ($_SESSION['productosCesta'] as $productoCesta){
-        $linea.="<p>".$_SESSION['unidadesCesta'][$codigo]." ".$productoCesta[0]." ".$productoCesta[1];   
+        $linea.="<p>".$_SESSION['unidadesCesta'][$codigo].$productoCesta."<br />";   
        }
        
-    
+     $otralinea=print_r($_SESSION['unidadesCesta']);
       $salida= new xajaxResponse();
-      $salida->assign('pCesta', 'innerHTML', $linea );
+      $salida->assign('pcesta', 'innerHTML', $otralinea );
             
     return $salida;
 }

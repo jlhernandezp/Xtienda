@@ -11,7 +11,8 @@ $ajax = new xajax('fcesta.php');
 $ajax->configure('debug',true);
 //Especificar la ubicación de la librería (En este caso innecesario)
 $ajax->configure('javascript URI','./');
- 
+$ajax->setCharEncoding('ISO-8859-1');
+
 //Ahora registramos las funciones que podrán ser invocadas de forma asíncrona desde el cliente
 $ajax->register(XAJAX_FUNCTION, 'actualiza');
 $ajax->register(XAJAX_FUNCTION, 'cargarCesta');
