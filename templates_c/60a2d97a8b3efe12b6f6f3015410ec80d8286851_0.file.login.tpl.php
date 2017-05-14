@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 3.1.30, created on 2017-05-08 19:59:27
+/* Smarty version 3.1.30, created on 2017-05-14 17:50:08
   from "C:\xampp\htdocs\Xtienda\smarty\login.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5910b1ff164305_65479214',
+  'unifunc' => 'content_59187cb0cea2b4_10611686',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5910b1ff164305_65479214 (Smarty_Internal_Template $_smarty_tpl) {
+function content_59187cb0cea2b4_10611686 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!DOCTYPE html>
 

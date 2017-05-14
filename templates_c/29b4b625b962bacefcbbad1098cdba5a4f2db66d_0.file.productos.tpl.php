@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 3.1.30, created on 2017-05-08 19:59:47
+/* Smarty version 3.1.30, created on 2017-05-14 17:50:13
   from "C:\xampp\htdocs\Xtienda\smarty\productos.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5910b213abb7a6_73706746',
+  'unifunc' => 'content_59187cb5b8b656_36597507',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:smarty/listaProducto.tpl' => 1,
   ),
 ),false)) {
-function content_5910b213abb7a6_73706746 (Smarty_Internal_Template $_smarty_tpl) {
+function content_59187cb5b8b656_36597507 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!DOCTYPE html>
 <!--

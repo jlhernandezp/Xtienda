@@ -11,8 +11,8 @@ $ajax = new xajax('fcesta.php');
 //Para poder tener una traza de lo que ocurre
 $ajax->configure('debug',true);
 //Especificar la ubicación de la librería (En este caso innecesario)
-$ajax->configure('javascript URI','./');
- 
+$ajax->configure('javascript URI','./js');
+$ajax->setCharEncoding('ISO-8859-1');
 //Ahora registramos las funciones que podrán ser invocadas de forma asíncrona desde el cliente
 $ajax->register(XAJAX_FUNCTION, 'actualiza');
 $ajax->register(XAJAX_FUNCTION, 'cargarCesta');
@@ -36,32 +36,30 @@ $smarty = new Smarty;
 
 
 function actualiza($post){
+    
+    
+   
    $producto=BD::obtieneProducto($post['cod']);
 
    Cesta::nuevo_articulo($producto['cod']);
    Cesta::carga_cesta(); 
-    $codigo=$producto['cod'];
-     
-     if (isset($_SESSION['unidadesCesta'][$codigo])){
-            if ($_SESSION['unidadesCesta'][$codigo] > 0) {
-                $_SESSION['unidadesCesta'][$codigo] ++;
-            } 
-       }else {
-               // $producto = BD::obtieneProducto($codigo);
-                $_SESSION['productosCesta'][$codigo]=$producto['PVP'];
-                $_SESSION['unidadesCesta'][$codigo]= 1;
-                
-                
-        }
-        Cesta::guarda_cesta();
-        $linea="";
-       foreach ($_SESSION['productosCesta'] as $productoCesta){
-        $linea.="<p>".$_SESSION['unidadesCesta'][$codigo].$productoCesta."<br />";   
-       }
+   Cesta::guarda_cesta();
+   
+   $linea="";
+   $total=0.0;
+   foreach ($_SESSION['productosCesta'] as $productoCesta => $pvp){
+        
+            $linea.=$_SESSION['unidadesCesta'][$productoCesta]." ".$productoCesta." ".$pvp."<br />";   //problema con codigo de producto 
+            $total+= floatval($_SESSION['unidadesCesta'][$productoCesta])*floatval($pvp);
+   }
        
-     $otralinea=print_r($_SESSION['unidadesCesta']);
+      $linea.="<hr />Total: ".$total." €";
+      $linea.="<hr/><form action='productos.php' method ='post'>"
+                    ."<input class='cestaAccion' type='submit' enabled name='cestaAccion' value='pagar'>"
+                    ."<input class='cestaAccion' type='submit' enabled name='cestaAccion' value='vaciar'>"
+                    ."</form> ";
       $salida= new xajaxResponse();
-      $salida->assign('pcesta', 'innerHTML', $otralinea );
+      $salida->assign('pagcesta', 'innerHTML', $linea );
             
     return $salida;
 }

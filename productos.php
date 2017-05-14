@@ -8,7 +8,7 @@ require ('xajax_core/xajax.inc.php');
 $ajax = new xajax('fcesta.php');
  
 //Para poder tener una traza de lo que ocurre
-$ajax->configure('debug',true);
+$ajax->configure('debug',false);
 //Especificar la ubicación de la librería (En este caso innecesario)
 $ajax->configure('javascript URI','./');
 $ajax->setCharEncoding('ISO-8859-1');
@@ -47,10 +47,6 @@ $smarty->cache_dir = '/web/smarty/tiendaSmarty/cache/';*/
 
 //De momento solo visualizamos que el usuario 
 $smarty->assign("usuario",$_SESSION['usuario']);
-// cesta a cero
-if (isset($_SESSION['productosCesta'])){
-
-}
 
 // obtenermos la lista de productos
 $cesta=new Cesta();

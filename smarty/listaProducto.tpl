@@ -5,7 +5,9 @@
         <title>práctica de tienda página de productos </title>
         <meta charset="UTF-8">
         <link href="estilos/tienda.css" rel="stylesheet" type="text/css">
-        <script src="js/fcesta.js"></script>
+       <script type='text/javascript' src="js/fcesta.js"></script> 
+        
+        
     </head>
     <body>
         <div id='contenedor'>
@@ -15,7 +17,7 @@
              
                 {foreach from=$listaProductos item=producto}
                 <p>
-                    <form id='listado' action="javascript:void(null);" onsubmit="actualiza();">
+                    <form id='listado{$producto->cod}' action="javascript:void(null);" onsubmit="actualiza();">
                                  <input type="hidden" name='cod' value='{$producto->cod}' />
                                  <input type="hidden" name='PVP' value='{$producto->PVP}' />
                                  <input type="submit" name="enviar" value="X-añadir"/></td>
@@ -27,7 +29,7 @@
                     {/foreach}
              
             </div>
-                    <div id='pcesta'></div>
+                    
              <br class="divisor" />
               <div id="pie">
               <form action='logoff.php' method='post'>
