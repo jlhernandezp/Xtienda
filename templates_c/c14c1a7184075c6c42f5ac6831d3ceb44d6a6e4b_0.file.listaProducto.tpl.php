@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2017-05-14 17:50:13
+/* Smarty version 3.1.30, created on 2017-05-14 18:58:17
   from "C:\xampp\htdocs\Xtienda\smarty\listaProducto.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_59187cb5be4c12_65722217',
+  'unifunc' => 'content_59188ca985f384_14567365',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'c14c1a7184075c6c42f5ac6831d3ceb44d6a6e4b' => 
     array (
       0 => 'C:\\xampp\\htdocs\\Xtienda\\smarty\\listaProducto.tpl',
-      1 => 1494776876,
+      1 => 1494781090,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_59187cb5be4c12_65722217 (Smarty_Internal_Template $_smarty_tpl) {
+function content_59188ca985f384_14567365 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!DOCTYPE html>
 
@@ -48,13 +48,13 @@ foreach ($_from as $_smarty_tpl->tpl_vars['producto']->value) {
 ?>
                 <p>
                     <form id='listado<?php echo $_smarty_tpl->tpl_vars['producto']->value->cod;?>
-' action="javascript:void(null);" onsubmit="actualiza();">
+' action="javascript:void(null);" onsubmit="xajax_actualiza(xajax.getFormValues('listado<?php echo $_smarty_tpl->tpl_vars['producto']->value->cod;?>
+'));">
                                  <input type="hidden" name='cod' value='<?php echo $_smarty_tpl->tpl_vars['producto']->value->cod;?>
 ' />
                                  <input type="hidden" name='PVP' value='<?php echo $_smarty_tpl->tpl_vars['producto']->value->PVP;?>
 ' />
-                                 <input type="submit" name="enviar" value="X-añadir"/></td>
-                                 
+                                 <input type="submit" name="enviar" value="X-añadir"/>                                 
                                 <?php echo $_smarty_tpl->tpl_vars['producto']->value->nombre_corto;?>
 : <?php echo $_smarty_tpl->tpl_vars['producto']->value->PVP;?>
 

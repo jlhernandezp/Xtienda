@@ -10,6 +10,7 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="estilos/tienda.css" rel="stylesheet" type="text/css">
+        <script type="txt/javascript" src="js/fcesta.js"></script>
         
     </head>
     <body>
@@ -35,19 +36,22 @@ and open the template in the editor.
                     {/foreach} 
                         
                         <span class="coste">Total: {$total|default:"&nbsp;"} € </span>
-                      
-                    
+                        
+                    <hr />
+                    <button class="cestaAccion" name="pagar" onclick="pagar()">Pagar</button>
+                    <button class="cestaAccion" name="vaciar" onclick='xajax_vaciarCesta()' >Vaciar</button>
+                                                 
                     {else}
                         <p>Cesta vacia</p>
-                        
+                        <hr />
+                        <form action='productos.php' method ='post'>
+                           <input class='cestaAccion' type='submit' {$activarBoton} name='cestaAccion' value='pagar'>
+                           <input class='cestaAccion' type='submit' {$activarBoton} name='cestaAccion' value='vaciar'>
+                       </form> 
                     {/if}
                     
                 </div> 
-                <hr />
-                 <form action='productos.php' method ='post'>
-                    <input class='cestaAccion' type='submit' {$activarBoton} name='cestaAccion' value='pagar'>
-                    <input class='cestaAccion' type='submit' {$activarBoton} name='cestaAccion' value='vaciar'>
-                </form> 
+                
             </div>
         </div>
     </body>

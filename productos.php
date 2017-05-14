@@ -51,7 +51,10 @@ $smarty->assign("usuario",$_SESSION['usuario']);
 // obtenermos la lista de productos
 $cesta=new Cesta();
 $baseDeDatos=new BD();
-$smarty->assign('activarBoton', 'disabled');
+$smarty->assign('total',$cesta->coste()); // este orden para no tener que cargar la cesta dos veces.
+$smarty->assign('productosCesta',$_SESSION['productosCesta']);
+
+$smarty->assign('activarBoton', $_SESSION['productosCesta']=="" ? 'disabled' : 'enabled');
 $smarty->assign('listaProductos',$baseDeDatos->obtieneProductos());
 
 $smarty->display('smarty/productos.tpl');

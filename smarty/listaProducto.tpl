@@ -17,11 +17,10 @@
              
                 {foreach from=$listaProductos item=producto}
                 <p>
-                    <form id='listado{$producto->cod}' action="javascript:void(null);" onsubmit="actualiza();">
+                    <form id='listado{$producto->cod}' action="javascript:void(null);" onsubmit="xajax_actualiza(xajax.getFormValues('listado{$producto->cod}'));">
                                  <input type="hidden" name='cod' value='{$producto->cod}' />
                                  <input type="hidden" name='PVP' value='{$producto->PVP}' />
-                                 <input type="submit" name="enviar" value="X-añadir"/></td>
-                                 
+                                 <input type="submit" name="enviar" value="X-añadir"/>                                 
                                 {$producto->nombre_corto}: {$producto->PVP}
                         </form>
                 </p>

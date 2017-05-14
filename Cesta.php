@@ -33,7 +33,7 @@ class Cesta {
    }
    
    public static function coste() {
-     
+       self::carga_cesta();
          $total=0.0;
        
        foreach (self::$productos as $clave => $valor) 

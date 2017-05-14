@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2017-05-14 17:50:13
+/* Smarty version 3.1.30, created on 2017-05-14 19:23:49
   from "C:\xampp\htdocs\Xtienda\smarty\cesta.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_59187cb5bca1e8_81538724',
+  'unifunc' => 'content_591892a5781e89_86792681',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '63dbedb9cd7496d490de9a8ff5a6176cfa038706' => 
     array (
       0 => 'C:\\xampp\\htdocs\\Xtienda\\smarty\\cesta.tpl',
-      1 => 1494776576,
+      1 => 1494782623,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_59187cb5bca1e8_81538724 (Smarty_Internal_Template $_smarty_tpl) {
+function content_591892a5781e89_86792681 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!DOCTYPE html>
 <!--
@@ -34,6 +34,9 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="estilos/tienda.css" rel="stylesheet" type="text/css">
+        <?php echo '<script'; ?>
+ type="txt/javascript" src="js/fcesta.js"><?php echo '</script'; ?>
+>
         
     </head>
     <body>
@@ -73,21 +76,24 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
                         
                         <span class="coste">Total: <?php echo (($tmp = @$_smarty_tpl->tpl_vars['total']->value)===null||$tmp==='' ? "&nbsp;" : $tmp);?>
  € </span>
-                      
-                    
+                        
+                    <hr />
+                    <button class="cestaAccion" name="pagar" onclick="pagar()">Pagar</button>
+                    <button class="cestaAccion" name="vaciar" onclick='xajax_vaciarCesta()' >Vaciar</button>
+                                                 
                     <?php } else { ?>
                         <p>Cesta vacia</p>
-                        
+                        <hr />
+                        <form action='productos.php' method ='post'>
+                           <input class='cestaAccion' type='submit' <?php echo $_smarty_tpl->tpl_vars['activarBoton']->value;?>
+ name='cestaAccion' value='pagar'>
+                           <input class='cestaAccion' type='submit' <?php echo $_smarty_tpl->tpl_vars['activarBoton']->value;?>
+ name='cestaAccion' value='vaciar'>
+                       </form> 
                     <?php }?>
                     
                 </div> 
-                <hr />
-                 <form action='productos.php' method ='post'>
-                    <input class='cestaAccion' type='submit' <?php echo $_smarty_tpl->tpl_vars['activarBoton']->value;?>
- name='cestaAccion' value='pagar'>
-                    <input class='cestaAccion' type='submit' <?php echo $_smarty_tpl->tpl_vars['activarBoton']->value;?>
- name='cestaAccion' value='vaciar'>
-                </form> 
+                
             </div>
         </div>
     </body>

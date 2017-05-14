@@ -1,3 +1,7 @@
 function actualiza(){
-      xajax_actualiza(xajax.getFormValues(xajax_actualiza(xajax.getFormValues('listado{$producto->cod}'))));
+      xajax_actualiza(xajax.getFormValues('listado'));
 };
+function vaciarCesta(){
+    xajax_vaciarCesta();
+}
+

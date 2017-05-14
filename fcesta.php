@@ -11,7 +11,7 @@ $ajax = new xajax('fcesta.php');
 //Para poder tener una traza de lo que ocurre
 $ajax->configure('debug',true);
 //Especificar la ubicación de la librería (En este caso innecesario)
-$ajax->configure('javascript URI','./js');
+$ajax->configure('javascript URI','.');
 $ajax->setCharEncoding('ISO-8859-1');
 //Ahora registramos las funciones que podrán ser invocadas de forma asíncrona desde el cliente
 $ajax->register(XAJAX_FUNCTION, 'actualiza');
@@ -49,18 +49,25 @@ function actualiza($post){
    $total=0.0;
    foreach ($_SESSION['productosCesta'] as $productoCesta => $pvp){
         
-            $linea.=$_SESSION['unidadesCesta'][$productoCesta]." ".$productoCesta." ".$pvp."<br />";   //problema con codigo de producto 
+            $linea.=$_SESSION['unidadesCesta'][$productoCesta]." ".$productoCesta." ".$pvp."<br />";
+            $linea.="<form name='compra' action='productos.php' method='post'>"
+                            ."<input type='hidden' name='codigo' value='".$productoCesta."' />"
+                            ."<input class='borrar' type='submit' name='borrar' value='' />"
+                        ."</form>";
             $total+= floatval($_SESSION['unidadesCesta'][$productoCesta])*floatval($pvp);
    }
        
       $linea.="<hr />Total: ".$total." €";
-      $linea.="<hr/><form action='productos.php' method ='post'>"
-                    ."<input class='cestaAccion' type='submit' enabled name='cestaAccion' value='pagar'>"
-                    ."<input class='cestaAccion' type='submit' enabled name='cestaAccion' value='vaciar'>"
-                    ."</form> ";
+      $linea.="<hr/><button class='cestaAccion' name='pagar'>Pagar</button>"
+                    ."<button class='cestaAccion' name='vaciar' onclick='xajax_vaciarCesta()'>Vaciar</button>";
       $salida= new xajaxResponse();
       $salida->assign('pagcesta', 'innerHTML', $linea );
             
     return $salida;
 }
 
+function vaciarCesta() {
+    alert("Estoy vaciando la cesta");
+    unset($_SESSION['productosCesta']);
+    unset($_SESSION['unidadesCesta']);
+}
