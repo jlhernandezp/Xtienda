@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2017-05-14 19:23:49
+/* Smarty version 3.1.30, created on 2017-05-16 12:04:57
   from "C:\xampp\htdocs\Xtienda\smarty\cesta.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_591892a5781e89_86792681',
+  'unifunc' => 'content_591acec9c68cc6_26543969',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '63dbedb9cd7496d490de9a8ff5a6176cfa038706' => 
     array (
       0 => 'C:\\xampp\\htdocs\\Xtienda\\smarty\\cesta.tpl',
-      1 => 1494782623,
+      1 => 1494929019,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_591892a5781e89_86792681 (Smarty_Internal_Template $_smarty_tpl) {
+function content_591acec9c68cc6_26543969 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!DOCTYPE html>
 <!--
@@ -62,7 +62,7 @@ foreach ($_from as $_smarty_tpl->tpl_vars['codigo']->value => $_smarty_tpl->tpl_
                         <form name="compra"action="productos.php" method="post">
                             <input type="hidden" name='codigo' value='<?php echo $_smarty_tpl->tpl_vars['codigo']->value;?>
 ' />
-                            <input class="borrar" type="submit" name="borrar" value="" />
+                            <input class="borrar" type="submit" name="borrar" value="X" />
                         </form>
                         </p>
                         <hr />
@@ -77,10 +77,11 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
                         <span class="coste">Total: <?php echo (($tmp = @$_smarty_tpl->tpl_vars['total']->value)===null||$tmp==='' ? "&nbsp;" : $tmp);?>
  € </span>
                         
-                    <hr />
-                    <button class="cestaAccion" name="pagar" onclick="pagar()">Pagar</button>
-                    <button class="cestaAccion" name="vaciar" onclick='xajax_vaciarCesta()' >Vaciar</button>
-                                                 
+                    <hr /><form action='productos.php' method ='post'>
+                        <button class="cestaAccion" name="cestaAccion" type="submit" value='pagar'>Pagar</button> 
+                          </form>
+                                                   
+                            <button class="cestaAccion" name="vaciar" onclick="javascript:vaciarCesta()" >Vaciar</button>                        
                     <?php } else { ?>
                         <p>Cesta vacia</p>
                         <hr />

@@ -15,7 +15,7 @@ $ajax->setCharEncoding('ISO-8859-1');
 
 //Ahora registramos las funciones que podrán ser invocadas de forma asíncrona desde el cliente
 $ajax->register(XAJAX_FUNCTION, 'actualiza');
-$ajax->register(XAJAX_FUNCTION, 'cargarCesta');
+$ajax->register(XAJAX_FUNCTION, 'borrarProducto');
 $ajax->register(XAJAX_FUNCTION, 'vaciarCesta');
 //Estas acciones implicarán que en el html del cliente se creen las funciones xajax_saludar ()   y xajax_otraFuncion()
  
@@ -43,21 +43,40 @@ $smarty = new Smarty;
 $smarty->compile_dir = '/web/smarty/tiendaSmarty/templates_c/';
 $smarty->config_dir = '/web/smarty/tiendaSmarty/configs/';
 $smarty->cache_dir = '/web/smarty/tiendaSmarty/cache/';*/
-
-
-//De momento solo visualizamos que el usuario 
-$smarty->assign("usuario",$_SESSION['usuario']);
-
-// obtenermos la lista de productos
 $cesta=new Cesta();
 $baseDeDatos=new BD();
-$smarty->assign('total',$cesta->coste()); // este orden para no tener que cargar la cesta dos veces.
-$smarty->assign('productosCesta',$_SESSION['productosCesta']);
 
-$smarty->assign('activarBoton', $_SESSION['productosCesta']=="" ? 'disabled' : 'enabled');
-$smarty->assign('listaProductos',$baseDeDatos->obtieneProductos());
+//usuario 
 
-$smarty->display('smarty/productos.tpl');
+    if (isset($_POST['cestaAccion'])){
+        
+        if ($_POST['cestaAccion']=='pagar'){
+            $smarty->assign('usuario',$_SESSION['usuario']);
+            $smarty->assign("productosCesta",$_SESSION['productosCesta']);
+            $smarty->assign("unidadesCesta",$_SESSION['unidadesCesta']);
+            $cesta->carga_cesta();
+            $smarty->assign('total',$cesta->coste());
+            $totalUnidades=0;
+            foreach ($_SESSION['unidadesCesta']as $valor){
+                $totalUnidades+= intval($valor);
+            }
+            $smarty->assign('totalUnidades',$totalUnidades);
+            $smarty->display('smarty/pagar.tpl');
 
+        } 
+    }else {
+            // obtenermos la lista de productos
+            
 
+            $smarty->assign("usuario",$_SESSION['usuario']);
+            $smarty->assign('total',$cesta->coste()); // este orden para no tener que cargar la cesta dos veces.
+            $smarty->assign('productosCesta',$_SESSION['productosCesta']);
+
+            $smarty->assign('activarBoton', $_SESSION['productosCesta']=="" ? 'disabled' : 'enabled');
+            $smarty->assign('listaProductos',$baseDeDatos->obtieneProductos());
+
+            $smarty->display('smarty/productos.tpl');   
+
+    }
+    
 ?>

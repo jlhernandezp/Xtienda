@@ -35,9 +35,9 @@ class Cesta {
    public static function coste() {
        self::carga_cesta();
          $total=0.0;
-       
-       foreach (self::$productos as $clave => $valor) 
-            $total+=(floatval ($valor)*floatval (self::$unidades[$clave]));
+       if (!empty(self::$productos))
+            foreach (self::$productos as $clave => $valor) 
+                $total+=(floatval ($valor)*floatval (self::$unidades[$clave]));
           
        
        $_SESSION['total']=$total;

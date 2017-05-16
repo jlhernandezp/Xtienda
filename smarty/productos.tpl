@@ -10,6 +10,7 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="estilos/tienda.css" rel="stylesheet" type="text/css">
+         <script type="txt/javascript" src="js/fcesta.js"></script>
     </head>
     <body class="pagproductos">
         <div id="contenedor">

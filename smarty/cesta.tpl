@@ -28,7 +28,7 @@ and open the template in the editor.
                             <span class='precio'>{$producto|default:"&nbsp;"}</span><br />
                         <form name="compra"action="productos.php" method="post">
                             <input type="hidden" name='codigo' value='{$codigo}' />
-                            <input class="borrar" type="submit" name="borrar" value="" />
+                            <input class="borrar" type="submit" name="borrar" value="X" />
                         </form>
                         </p>
                         <hr />
@@ -37,10 +37,11 @@ and open the template in the editor.
                         
                         <span class="coste">Total: {$total|default:"&nbsp;"} € </span>
                         
-                    <hr />
-                    <button class="cestaAccion" name="pagar" onclick="pagar()">Pagar</button>
-                    <button class="cestaAccion" name="vaciar" onclick='xajax_vaciarCesta()' >Vaciar</button>
-                                                 
+                    <hr /><form action='productos.php' method ='post'>
+                        <button class="cestaAccion" name="cestaAccion" type="submit" value='pagar'>Pagar</button> 
+                          </form>
+                                                   
+                            <button class="cestaAccion" name="vaciar" onclick="javascript:vaciarCesta()" >Vaciar</button>                        
                     {else}
                         <p>Cesta vacia</p>
                         <hr />

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2017-05-14 18:21:16
+/* Smarty version 3.1.30, created on 2017-05-16 09:36:07
   from "C:\xampp\htdocs\Xtienda\smarty\productos.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_591883fc5c9199_85665500',
+  'unifunc' => 'content_591aabe7e03e34_55254147',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '29b4b625b962bacefcbbad1098cdba5a4f2db66d' => 
     array (
       0 => 'C:\\xampp\\htdocs\\Xtienda\\smarty\\productos.tpl',
-      1 => 1494265644,
+      1 => 1494920155,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:smarty/listaProducto.tpl' => 1,
   ),
 ),false)) {
-function content_591883fc5c9199_85665500 (Smarty_Internal_Template $_smarty_tpl) {
+function content_591aabe7e03e34_55254147 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!DOCTYPE html>
 <!--
@@ -36,6 +36,9 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="estilos/tienda.css" rel="stylesheet" type="text/css">
+         <?php echo '<script'; ?>
+ type="txt/javascript" src="js/fcesta.js"><?php echo '</script'; ?>
+>
     </head>
     <body class="pagproductos">
         <div id="contenedor">

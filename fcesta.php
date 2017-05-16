@@ -50,16 +50,17 @@ function actualiza($post){
    foreach ($_SESSION['productosCesta'] as $productoCesta => $pvp){
         
             $linea.=$_SESSION['unidadesCesta'][$productoCesta]." ".$productoCesta." ".$pvp."<br />";
-            $linea.="<form name='compra' action='productos.php' method='post'>"
+            $linea.="<form name='compra' action='javascript:void(null)'  method='post' onsubmit='');>"
                             ."<input type='hidden' name='codigo' value='".$productoCesta."' />"
-                            ."<input class='borrar' type='submit' name='borrar' value='' />"
+                            ."<input class='borrar' type='submit' name='borrar' value='$productoCesta' />"
                         ."</form>";
             $total+= floatval($_SESSION['unidadesCesta'][$productoCesta])*floatval($pvp);
    }
        
       $linea.="<hr />Total: ".$total." €";
-      $linea.="<hr/><button class='cestaAccion' name='pagar'>Pagar</button>"
-                    ."<button class='cestaAccion' name='vaciar' onclick='xajax_vaciarCesta()'>Vaciar</button>";
+      $linea.="<hr/>"
+                    ."<form name='cestaAccion' method='post' ><button class='cestaAccion' name='cestaAccion' type='submit' formaction='productos.php' value='pagar'>Pagar</button></form>"
+                    ."<button class='cestaAccion' name='vaciar' onclick='javascript:vaciarCesta()'>Vaciar</button>";
       $salida= new xajaxResponse();
       $salida->assign('pagcesta', 'innerHTML', $linea );
             
@@ -67,7 +68,16 @@ function actualiza($post){
 }
 
 function vaciarCesta() {
-    alert("Estoy vaciando la cesta");
-    unset($_SESSION['productosCesta']);
-    unset($_SESSION['unidadesCesta']);
+   Cesta::vacia();
+   $linea="";
+   $total=0.0;
+   
+   $linea.="<hr />Total: ".$total." €";
+      $linea.="<hr/><button class='cestaAccion' name='pagar'>Pagar</button>"
+                    ."<button class='cestaAccion' name='vaciar' onclick='javascript:vaciarCesta()'>Vaciar</button>";
+      $salida= new xajaxResponse();
+      $salida->assign('pagcesta', 'innerHTML', $linea );
+            
+    return $salida;
+           
 }
