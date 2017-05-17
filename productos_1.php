@@ -14,7 +14,7 @@ $ajax->configure('javascript URI','./');
  
 //Ahora registramos las funciones que podrán ser invocadas de forma asíncrona desde el cliente
 $ajax->register(XAJAX_FUNCTION, 'actualiza');
-$ajax->register(XAJAX_FUNCTION, 'cargarCesta');
+$ajax->register(XAJAX_FUNCTION, 'borrarProducto');
 $ajax->register(XAJAX_FUNCTION, 'vaciarCesta');
 //Estas acciones implicarán que en el html del cliente se creen las funciones xajax_saludar ()   y xajax_otraFuncion()
  
