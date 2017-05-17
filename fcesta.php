@@ -50,7 +50,7 @@ function actualiza($post){
    foreach ($_SESSION['productosCesta'] as $productoCesta => $pvp){
         
             $linea.=$_SESSION['unidadesCesta'][$productoCesta]." ".$productoCesta." ".$pvp."<br />";
-            $linea.="<form name='compra' action='javascript:void(null)'  method='post' onsubmit='borrarProducto();>"
+            $linea.="<form id='compra' action='javascript:void(null)'  method='post' onsubmit='borrarProducto()'>"
                             ."<input type='hidden' name='codigo' value='".$productoCesta."' />"
                             ."<input class='borrar' type='submit' name='borrar' value='X' />"
                         ."</form>";
@@ -83,7 +83,8 @@ function vaciarCesta() {
 }
 
 function borrarProducto($productoABorrar){
-    
+    session_start();
+    $retorno->alert('entradaen borrar producto');
     
     $linea="";
     $total=0.0;
@@ -98,7 +99,7 @@ function borrarProducto($productoABorrar){
    foreach ($_SESSION['productosCesta'] as $productoCesta => $pvp){
         
             $linea.=$_SESSION['unidadesCesta'][$productoCesta]." ".$productoCesta." ".$pvp."<br />";
-            $linea.="<form name='compra' action='javascript:void(null)'  method='post' onsubmit='borrarProducto()';>"
+            $linea.="<form id='compra' action='javascript:void(null)'  method='post' onsubmit='borrarProducto();'>"
                             ."<input type='hidden' name='codigo' value='".$productoCesta."' />"
                             ."<input class='borrar' type='submit' name='borrar' value='X' />"
                         ."</form>";
