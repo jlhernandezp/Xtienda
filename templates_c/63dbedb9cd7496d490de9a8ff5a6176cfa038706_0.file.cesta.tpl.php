@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2017-05-16 12:04:57
+/* Smarty version 3.1.30, created on 2017-05-17 10:26:28
   from "C:\xampp\htdocs\Xtienda\smarty\cesta.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_591acec9c68cc6_26543969',
+  'unifunc' => 'content_591c09343080a5_44812659',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '63dbedb9cd7496d490de9a8ff5a6176cfa038706' => 
     array (
       0 => 'C:\\xampp\\htdocs\\Xtienda\\smarty\\cesta.tpl',
-      1 => 1494929019,
+      1 => 1495009582,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_591acec9c68cc6_26543969 (Smarty_Internal_Template $_smarty_tpl) {
+function content_591c09343080a5_44812659 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!DOCTYPE html>
 <!--
@@ -59,7 +59,7 @@ foreach ($_from as $_smarty_tpl->tpl_vars['codigo']->value => $_smarty_tpl->tpl_
 </span>
                             <span class='precio'><?php echo (($tmp = @$_smarty_tpl->tpl_vars['producto']->value)===null||$tmp==='' ? "&nbsp;" : $tmp);?>
 </span><br />
-                        <form name="compra"action="productos.php" method="post">
+                        <form name="compra" action='javascript:void(null)'  method='post' onsubmit='borrarProducto()'>
                             <input type="hidden" name='codigo' value='<?php echo $_smarty_tpl->tpl_vars['codigo']->value;?>
 ' />
                             <input class="borrar" type="submit" name="borrar" value="X" />

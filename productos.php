@@ -71,7 +71,7 @@ $baseDeDatos=new BD();
             $smarty->assign("usuario",$_SESSION['usuario']);
             $smarty->assign('total',$cesta->coste()); // este orden para no tener que cargar la cesta dos veces.
             $smarty->assign('productosCesta',$_SESSION['productosCesta']);
-
+            $smarty->assign("unidadesCesta",$_SESSION['unidadesCesta']);
             $smarty->assign('activarBoton', $_SESSION['productosCesta']=="" ? 'disabled' : 'enabled');
             $smarty->assign('listaProductos',$baseDeDatos->obtieneProductos());
 

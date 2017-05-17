@@ -50,7 +50,7 @@ function actualiza($post){
    foreach ($_SESSION['productosCesta'] as $productoCesta => $pvp){
         
             $linea.=$_SESSION['unidadesCesta'][$productoCesta]." ".$productoCesta." ".$pvp."<br />";
-            $linea.="<form name='compra' action='javascript:void(null)'  method='post' onsubmit='xajax_borrarProducto($productoCesta)');>"
+            $linea.="<form name='compra' action='javascript:void(null)'  method='post' onsubmit='borrarProducto();>"
                             ."<input type='hidden' name='codigo' value='".$productoCesta."' />"
                             ."<input class='borrar' type='submit' name='borrar' value='X' />"
                         ."</form>";
@@ -88,17 +88,17 @@ function borrarProducto($productoABorrar){
     $linea="";
     $total=0.0;
     //borramos el producto en el caso de que solo haya un artículo, disminuimos en uno el valor de unidades si hay más de 1
-   if (floatval($_SESSION['unidadesCesta'][$productoABorrar]<=1)){
-       unset($_SESSION['productosCesta'][$productoABorrar]);
-       unset($_SESSION['unidadesCesta'][$productoABorrar]);
+   if (floatval($_SESSION['unidadesCesta'][$productoABorrar['codigo']]<=1)){
+       unset($_SESSION['productosCesta'][$productoABorrar['codigo']]);
+       unset($_SESSION['unidadesCesta'][$productoABorrar['codigo']]);
    } else {
-       $_SESSION['unidadesCesta'][$productoABorrar]= floatval($_SESSION['unidadesCesta'][$productoABorrar])-1;
+       $_SESSION['unidadesCesta'][$productoABorrar['codigo']]= floatval($_SESSION['unidadesCesta'][$productoABorrar['codigo']])-1;
    }
    //mostramos otra vez la lista. Si existen más productos.
    foreach ($_SESSION['productosCesta'] as $productoCesta => $pvp){
         
             $linea.=$_SESSION['unidadesCesta'][$productoCesta]." ".$productoCesta." ".$pvp."<br />";
-            $linea.="<form name='compra' action='javascript:void(null)'  method='post' onsubmit='xajax_borrarProducto('$productoCesta')');>"
+            $linea.="<form name='compra' action='javascript:void(null)'  method='post' onsubmit='borrarProducto()';>"
                             ."<input type='hidden' name='codigo' value='".$productoCesta."' />"
                             ."<input class='borrar' type='submit' name='borrar' value='X' />"
                         ."</form>";

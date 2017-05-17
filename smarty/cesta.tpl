@@ -26,7 +26,7 @@ and open the template in the editor.
                             <span class='cantidad'>{$unidadesCesta[$codigo]|default:"&nbsp;"}</span>
                             <span class='codigo'>{$codigo|default:"&nbsp;" }</span>
                             <span class='precio'>{$producto|default:"&nbsp;"}</span><br />
-                        <form name="compra"action="productos.php" method="post">
+                        <form name="compra" action='javascript:void(null)'  method='post' onsubmit='borrarProducto()'>
                             <input type="hidden" name='codigo' value='{$codigo}' />
                             <input class="borrar" type="submit" name="borrar" value="X" />
                         </form>
