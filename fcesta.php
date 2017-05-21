@@ -50,13 +50,13 @@ function actualiza($post){
    foreach ($_SESSION['productosCesta'] as $productoCesta => $pvp){
         
             $linea.=$_SESSION['unidadesCesta'][$productoCesta]." ".$productoCesta." ".$pvp."<br />";
-            $linea.="<form id='compra' action='javascript:void(null)'  method='post' onsubmit='borrarProducto()'>"
-                            ."<input type='hidden' name='codigo' value='".$productoCesta."' />"
+
+            $linea.="<form name='compra' action='javascript:borrarProducto('$productoCesta')'  method='post' >"
+                            ."función actualiza php<br/><input type='hidden' name='codigo' value='".$productoCesta."' />"
                             ."<input class='borrar' type='submit' name='borrar' value='X' />"
                         ."</form>";
             $total+= floatval($_SESSION['unidadesCesta'][$productoCesta])*floatval($pvp);
    }
-       
       $linea.="<hr />Total: ".$total." €";
       $linea.="<hr/>"
                     ."<form name='cestaAccion' method='post' ><button class='cestaAccion' name='cestaAccion' type='submit' formaction='productos.php' value='pagar'>Pagar</button></form>"
@@ -99,8 +99,8 @@ function borrarProducto($productoABorrar){
    foreach ($_SESSION['productosCesta'] as $productoCesta => $pvp){
         
             $linea.=$_SESSION['unidadesCesta'][$productoCesta]." ".$productoCesta." ".$pvp."<br />";
-            $linea.="<form id='compra' action='javascript:void(null)'  method='post' onsubmit='borrarProducto();'>"
-                            ."<input type='hidden' name='codigo' value='".$productoCesta."' />"
+            $linea.="<form name='compra' action='javascript:void(null)'  method='post' onsubmit='borrarProducto('$productoCesta')');>"
+                            ."función borrarProducto php<br><input type='hidden' name='codigo' value='".$productoCesta."' />"
                             ."<input class='borrar' type='submit' name='borrar' value='X' />"
                         ."</form>";
             $total+= floatval($_SESSION['unidadesCesta'][$productoCesta])*floatval($pvp);

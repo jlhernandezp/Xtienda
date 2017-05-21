@@ -12,3 +12,7 @@ function borrarProducto(){
 }
 
 
+function borrarProducto(codigo) {
+    alert("borrando el producto "+codigo+" desde fcesta.js");
+    xaja_borrarProducto(codigo);
+}

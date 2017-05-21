@@ -23,10 +23,10 @@ and open the template in the editor.
                     {if !empty($productosCesta)}
                     {foreach from=$productosCesta item=$producto key=$codigo}
                         <p>
-                            <span class='cantidad'>{$unidadesCesta[$codigo]|default:"&nbsp;"}</span>
+                            <span class='cantidad'>{$unidadesCesta[{$codigo}]|default:"&nbsp;"}</span>
                             <span class='codigo'>{$codigo|default:"&nbsp;" }</span>
                             <span class='precio'>{$producto|default:"&nbsp;"}</span><br />
-                        <form id="compra" action='javascript:void(null)'  method='post' onsubmit='borrarProducto()'>
+                         <form name="compra"action="javascript:void(null)" method="post" onsubmit="borrarProducto('{$codigo}');">
                             <input type="hidden" name='codigo' value='{$codigo}' />
                             <input class="borrar" type="submit" name="borrar" value="X" />
                         </form>
