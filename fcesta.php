@@ -50,11 +50,17 @@ function actualiza($post){
    foreach ($_SESSION['productosCesta'] as $productoCesta => $pvp){
         
             $linea.=$_SESSION['unidadesCesta'][$productoCesta]." ".$productoCesta." ".$pvp."<br />";
-
-            $linea.="<form name='compra' action='javascript:borrarProducto('$productoCesta')'  method='post' >"
+/*
+            $linea.="<form name='compra' action='javascript:void(null)' onsubmit='borrarProducto('$productoCesta')' method='post' >"
                             ."función actualiza php<br/><input type='hidden' name='codigo' value='".$productoCesta."' />"
                             ."<input class='borrar' type='submit' name='borrar' value='X' />"
-                        ."</form>";
+                        ."</form>";*/
+            $linea.=<<<FIN
+                    <form name="compra" action="javascript:void(null)" onsubmit="borrarProducto('$productoCesta')" method='post' >
+                    <br/><input type="hidden" name="codigo" value="$productoCesta" />
+                    <input class="borrar" type="submit" name="borrar" value="X" />
+                    </form>
+FIN;
             $total+= floatval($_SESSION['unidadesCesta'][$productoCesta])*floatval($pvp);
    }
       $linea.="<hr />Total: ".$total." €";
@@ -66,7 +72,10 @@ function actualiza($post){
             
     return $salida;
 }
-
+/**
+ *  Vacia los productos de la  cesta
+ * @return \xajaxResponse
+ */
 function vaciarCesta() {
    Cesta::vacia();
    $linea="";
@@ -81,38 +90,42 @@ function vaciarCesta() {
     return $salida;
            
 }
-
+/**
+ * Borra un producto de la cesta
+ * 
+ * @param type $productoABorrar código del producto a borrar
+ * @return \xajaxResponse
+ */
 function borrarProducto($productoABorrar){
-    session_start();
-    $retorno->alert('entradaen borrar producto');
     
     $linea="";
     $total=0.0;
     //borramos el producto en el caso de que solo haya un artículo, disminuimos en uno el valor de unidades si hay más de 1
-   if (floatval($_SESSION['unidadesCesta'][$productoABorrar['codigo']]<=1)){
-       unset($_SESSION['productosCesta'][$productoABorrar['codigo']]);
-       unset($_SESSION['unidadesCesta'][$productoABorrar['codigo']]);
+   if (floatval($_SESSION['unidadesCesta'][$productoABorrar]<=1)){
+       unset($_SESSION['productosCesta'][$productoABorrar]);
+       unset($_SESSION['unidadesCesta'][$productoABorrar]);
    } else {
-       $_SESSION['unidadesCesta'][$productoABorrar['codigo']]= floatval($_SESSION['unidadesCesta'][$productoABorrar['codigo']])-1;
+       $_SESSION['unidadesCesta'][$productoABorrar]= floatval($_SESSION['unidadesCesta'][$productoABorrar])-1;
    }
    //mostramos otra vez la lista. Si existen más productos.
-   foreach ($_SESSION['productosCesta'] as $productoCesta => $pvp){
+foreach ($_SESSION['productosCesta'] as $productoCesta => $pvp){
         
             $linea.=$_SESSION['unidadesCesta'][$productoCesta]." ".$productoCesta." ".$pvp."<br />";
-            $linea.="<form name='compra' action='javascript:void(null)'  method='post' onsubmit='borrarProducto('$productoCesta')');>"
-                            ."función borrarProducto php<br><input type='hidden' name='codigo' value='".$productoCesta."' />"
-                            ."<input class='borrar' type='submit' name='borrar' value='X' />"
-                        ."</form>";
+            $linea.=<<<FIN
+                    <form name="compra" action="javascript:void(null)" onsubmit="borrarProducto('$productoCesta')" method='post' >
+                    <br/><input type="hidden" name="codigo" value="$productoCesta" />
+                    <input class="borrar" type="submit" name="borrar" value="X" />
+                    </form>
+FIN;
             $total+= floatval($_SESSION['unidadesCesta'][$productoCesta])*floatval($pvp);
    }
-       
       $linea.="<hr />Total: ".$total." €";
       $linea.="<hr/>"
                     ."<form name='cestaAccion' method='post' ><button class='cestaAccion' name='cestaAccion' type='submit' formaction='productos.php' value='pagar'>Pagar</button></form>"
                     ."<button class='cestaAccion' name='vaciar' onclick='javascript:vaciarCesta()'>Vaciar</button>";
-    
-    $salida= new xajaxResponse();
-    $salida->assign('pagcesta', 'innerHTML', $linea );
+   
+      $salida= new xajaxResponse();
+      $salida->assign('pagcesta', 'innerHTML', $linea );
             
     return $salida;
 }
